@@ -33,7 +33,16 @@ public class Partida {
 	 * @param   nc  numero de barcos
 	 */
 	public Partida(int nf, int nc, int nb) {
-        // POR IMPLEMENTAR		
+        // POR IMPLEMENTAR
+		numFilas = nf;
+		numColumnas = nc;
+		numBarcos = nb;
+		
+		mar = new int [nf] [nc];
+		disparos = 0;
+		quedan = 6;
+		
+		ponBarcos();
 	}
 	
 	/**
@@ -44,6 +53,27 @@ public class Partida {
 	 */	
     public int pruebaCasilla(int f, int c) {
         // POR IMPLEMENTAR
+    	if (mar[f][c] == TOCADO || mar[f][c] == HUNDIDO || mar[f][c] == AGUA) {
+    		return mar[f][c];
+    	} else {
+    		if (mar[f][c] == 0)
+    			return AGUA;
+    		
+    		else {
+    			int idBarco = mar[f][c];
+    			Barco barco = barcos.get(idBarco);
+    			
+    			if(barco.getTamanyo() == barco.getTocadas())
+    				return HUNDIDO;
+    			
+    			else {
+    				barco.tocaBarco();
+    				if(barco.getTamanyo() == barco.getTocadas()) {
+    					//POR IMPLEMENTAR
+    				}
+    			}
+    		}
+    	}
     	return 0;
     }
     
@@ -106,7 +136,10 @@ public class Partida {
                 col = random.nextInt(numColumnas + 1 - tam); // resta tam para asegurar que cabe
                 fila = random.nextInt(numFilas);
 
-                // Comprueba si cabe a partir de la posicion generada con mar o borde alrededor
+                /******************************************************************************************/
+            	/*****************************     GETTERS y SETTERS    ***********************************/
+            	/******************************************************************************************/
+            	     // Comprueba si cabe a partir de la posicion generada con mar o borde alrededor
                 if (librePosiciones(fila, col, tam+1, 'H')) {
                 	// Coloca el barco en el mar
                     for (int i = 0; i < tam; i++) {
