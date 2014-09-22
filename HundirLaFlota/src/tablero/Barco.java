@@ -25,7 +25,15 @@ public class Barco {
 	 * @param tocadas		numero de celdas tocadas
 	 */
 	public Barco(int f, int c, char orientacion, int tamanyo) {
-        // POR IMPLEMENTAR
+        this.filaInicial=f;
+        this.columnaInicial=c;
+        this.orientacion=orientacion;
+        this.tamanyo=tamanyo;
+		this.tocadas=0;
+		
+		
+		
+		
 	}
 	
 	
@@ -37,12 +45,56 @@ public class Barco {
 	public String toString() {
 		return filaInicial + "#" + columnaInicial + "#" + orientacion + "#" + tamanyo;
 	}
-	
+
 	/******************************************************************************************/
 	/*****************************     GETTERS y SETTERS    ***********************************/
 	/******************************************************************************************/
 	
-	// POR IMPLEMENTAR
+	public int getFilaInicial() {
+		return filaInicial;
+	}
 
+	public void setFilaInicial(int filaInicial) {
+		this.filaInicial = filaInicial;
+	}
+
+	public int getColumnaInicial() {
+		return columnaInicial;
+	}
+
+	public void setColumnaInicial(int columnaInicial) {
+		this.columnaInicial = columnaInicial;
+	}
+
+	public char getOrientacion() {
+		return orientacion;
+	}
+
+	public void setOrientacion(char orientacion) {
+		this.orientacion = orientacion;
+	}
+
+	public int getTamanyo() {
+		return tamanyo;
+	}
+
+	public void setTamanyo(int tamanyo) {
+		this.tamanyo = tamanyo;
+	}
+
+	public int getTocadas() {
+		return tocadas;
+	}
+
+	public void setTocadas(int tocadas) {
+		this.tocadas = tocadas;
+	}
+	///////////////////////////////////////
+	
+	//Toca Barco
+	
+	public void tocaBarco(){
+		this.tocadas++;
+	}
 
 } // end class Barco
