@@ -62,19 +62,35 @@ public class Partida {
     		else {
     			int idBarco = mar[f][c];
     			Barco barco = barcos.get(idBarco);
-    			
-    			if(barco.getTamanyo() == barco.getTocadas())
-    				return HUNDIDO;
-    			
-    			else {
-    				barco.tocaBarco();
-    				if(barco.getTamanyo() == barco.getTocadas()) {
-    					//POR IMPLEMENTAR
-    				}
-    			}
-    		}
-    	}
-    	return 0;
+ 				barco.tocaBarco();
+				
+ 				if(barco.getTamanyo() == barco.getTocadas()) {
+					//El barco se hunde, cambiar todas las casillas del barco a HUNDIDO y devolover el id del barco.
+					int fila = barco.getFilaInicial();
+					int col = barco.getColumnaInicial();
+					int tam = barco.getTamanyo();
+					char orientacion = barco.getOrientacion();
+					
+					if (orientacion == 'H') {
+						for(int i = 0; i < tam; i++) {
+							mar[fila][col++] = HUNDIDO;
+						}
+					}
+				
+					else {
+						for(int i = 0; i < tam; i++) {
+							mar[fila++][col] = HUNDIDO;
+						}
+					}
+				
+					return idBarco;
+				} else {
+					//El barco es tocado.
+					mar[f][c] = TOCADO;
+					return TOCADO;
+				}
+			}
+		}
     }
     
 
