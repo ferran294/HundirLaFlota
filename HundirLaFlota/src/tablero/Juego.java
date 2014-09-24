@@ -2,11 +2,13 @@ package tablero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
 
 public class Juego {
 	
@@ -41,14 +43,18 @@ public class Juego {
 	 * Lanza una nueva hebra que establece los atributos del juego y dibuja la interfaz grafica: tablero
 	 */
 	private void ejecuta() {
-        // POR IMPLEMENTAR
+       
+		// POR IMPLEMENTAR
+		
 	} // end ejecuta
 	
 	/**
 	 * Dibuja el tablero de juego y crea la partida inicial
 	 */
 	private void dibujaTablero() {
+		 
         // POR IMPLEMENTAR
+		//hola
 	} // end dibujaTablero
 	
 	/**
@@ -65,6 +71,34 @@ public class Juego {
 	 * @param nc	numero de columnas
 	 */
 	private void anyadeGrid(int nf, int nc) {
+		Container casillas= frame.getContentPane();
+		casillas.setLayout(new GridLayout(NUMFILAS+1, NUMCOLUMNAS+2));
+		String[] vectorLetras={"A","B","C","D","E","F","G","H"};
+		
+		casillas.add(new JLabel(""));
+		casillas.add(new JLabel("1"));
+		casillas.add(new JLabel("2"));
+		casillas.add(new JLabel("3"));
+		casillas.add(new JLabel("4"));
+		casillas.add(new JLabel("5"));
+		casillas.add(new JLabel("6"));
+		casillas.add(new JLabel("7"));
+		casillas.add(new JLabel("8"));
+		casillas.add(new JLabel(""));
+		
+		
+		for(int i=0;i<NUMFILAS;i++){
+			for(int j=0;j<NUMCOLUMNAS+2;j++){
+				if(j==0){
+					casillas.add(new JLabel(vectorLetras[i]));
+				}
+				if(j==NUMCOLUMNAS+1){
+					casillas.add(new JLabel(vectorLetras[i]));
+				}
+				
+			}
+		}
+		
         // POR IMPLEMENTAR		
 	} // end anyadeGrid
 	
