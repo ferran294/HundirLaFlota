@@ -54,7 +54,7 @@ public class Juego {
 	private void dibujaTablero() {
 		 
         // POR IMPLEMENTAR
-		//hola
+		//holaa
 	} // end dibujaTablero
 	
 	/**
