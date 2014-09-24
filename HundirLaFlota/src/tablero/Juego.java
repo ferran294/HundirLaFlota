@@ -42,20 +42,42 @@ public class Juego {
 	 */
 	private void ejecuta() {
         // POR IMPLEMENTAR
+		frame = new JFrame();
+		frame.setVisible(true);
+		anyadeMenu();
 	} // end ejecuta
 	
 	/**
 	 * Dibuja el tablero de juego y crea la partida inicial
 	 */
 	private void dibujaTablero() {
-        // POR IMPLEMENTAR
+        // PUTA
 	} // end dibujaTablero
 	
 	/**
 	 * Anyade el menu de opciones del juego
 	 */
 	private void anyadeMenu() {
-        // POR IMPLEMENTAR
+		MenuListener e = new MenuListener();
+		
+		JMenuBar mb = new JMenuBar();
+		frame.setJMenuBar(mb);
+		
+		JMenu menu = new JMenu("Opciones");
+		mb.add(menu);
+		
+		JMenuItem salir = new JMenuItem("Salir");
+		salir.addActionListener(e);
+		menu.add(salir);
+		
+		JMenuItem nuevaPartida = new JMenuItem("Nueva partida");
+		nuevaPartida.addActionListener(e);
+		menu.add(nuevaPartida);
+		
+		JMenuItem solucion = new JMenuItem("Mostrar solución");
+		solucion.addActionListener(e);
+		menu.add(solucion);
+		
 	} // end anyadeMenu
 
 	/**
