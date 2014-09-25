@@ -43,9 +43,9 @@ public class Juego {
 	private void ejecuta() {
         // POR IMPLEMENTAR
 		frame = new JFrame();
-		frame.setSize(400, 400);
 		frame.setVisible(true);
 		anyadeMenu();
+		frame.setSize(400, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	} // end ejecuta
 	
