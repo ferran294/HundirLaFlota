@@ -43,8 +43,10 @@ public class Juego {
 	private void ejecuta() {
         // POR IMPLEMENTAR
 		frame = new JFrame();
+		frame.setSize(400, 400);
 		frame.setVisible(true);
 		anyadeMenu();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	} // end ejecuta
 	
 	/**
@@ -67,6 +69,7 @@ public class Juego {
 		mb.add(menu);
 		
 		JMenuItem salir = new JMenuItem("Salir");
+		salir.setActionCommand("salir");
 		salir.addActionListener(e);
 		menu.add(salir);
 		
@@ -88,6 +91,8 @@ public class Juego {
 	 */
 	private void anyadeGrid(int nf, int nc) {
         // POR IMPLEMENTAR		
+		
+		//JButton metodo Propierty para asignar propiedad al boton y saber asi en que lugar de la matriz se encuentra
 	} // end anyadeGrid
 	
 
@@ -134,7 +139,13 @@ public class Juego {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-	        // POR IMPLEMENTAR	
+			String opcion=e.getActionCommand();
+			switch(opcion){
+			case"salir":
+				System.exit(0);
+			}
+			
+			// POR IMPLEMENTAR	
 		} // end actionPerformed
 		
 	} // end class MenuListener
