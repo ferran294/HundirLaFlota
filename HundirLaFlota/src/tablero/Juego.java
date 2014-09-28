@@ -118,7 +118,7 @@ public class Juego {
 				if(j==NUMCOLUMNAS+1){
 					casillas.add(new JLabel(vectorLetras[i]));
 				}
-				
+				//Hola
 			}
 		}
 		
