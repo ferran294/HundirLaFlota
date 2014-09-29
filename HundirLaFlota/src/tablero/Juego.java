@@ -134,10 +134,10 @@ public class Juego {
 	 * @param cadena	cadena inicial del panel de estado
 	 */
 	private void anyadePanelEstado(String cadena) {	
-		JPanel estado = new JPanel();
-		JLabel textoEstado = new JLabel(cadena);
-		estado.add(textoEstado);
-		frame.add(estado);
+		JPanel panelEstado = new JPanel();
+		estado = new JLabel(cadena);
+		panelEstado.add(estado);
+		frame.add(panelEstado);
 	} // end anyadePanel Estado
 	
 	/**
@@ -146,6 +146,7 @@ public class Juego {
 	 */
 	private void cambiaEstado(String cadenaEstado) {
         // POR IMPLEMENTAR
+		estado.setText(cadenaEstado);
 	} // end cambiaEstado
 	
 	/**
