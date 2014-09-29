@@ -2,11 +2,13 @@ package tablero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
 
 public class Juego {
 	
@@ -41,10 +43,14 @@ public class Juego {
 	 * Lanza una nueva hebra que establece los atributos del juego y dibuja la interfaz grafica: tablero
 	 */
 	private void ejecuta() {
-        // POR IMPLEMENTAR
+       
+		// POR IMPLEMENTAR
+		
 		frame = new JFrame();
 		frame.setVisible(true);
 		anyadeMenu();
+		frame.setSize(400, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	} // end ejecuta
 	
 	/**
@@ -67,6 +73,7 @@ public class Juego {
 		mb.add(menu);
 		
 		JMenuItem salir = new JMenuItem("Salir");
+		salir.setActionCommand("salir");
 		salir.addActionListener(e);
 		menu.add(salir);
 		
@@ -87,7 +94,37 @@ public class Juego {
 	 * @param nc	numero de columnas
 	 */
 	private void anyadeGrid(int nf, int nc) {
+		Container casillas= frame.getContentPane();
+		casillas.setLayout(new GridLayout(NUMFILAS+1, NUMCOLUMNAS+2));
+		String[] vectorLetras={"A","B","C","D","E","F","G","H"};
+		
+		casillas.add(new JLabel(""));
+		casillas.add(new JLabel("1"));
+		casillas.add(new JLabel("2"));
+		casillas.add(new JLabel("3"));
+		casillas.add(new JLabel("4"));
+		casillas.add(new JLabel("5"));
+		casillas.add(new JLabel("6"));
+		casillas.add(new JLabel("7"));
+		casillas.add(new JLabel("8"));
+		casillas.add(new JLabel(""));
+		
+		
+		for(int i=0;i<NUMFILAS;i++){
+			for(int j=0;j<NUMCOLUMNAS+2;j++){
+				if(j==0){
+					casillas.add(new JLabel(vectorLetras[i]));
+				}
+				if(j==NUMCOLUMNAS+1){
+					casillas.add(new JLabel(vectorLetras[i]));
+				}
+				//Hola
+			}
+		}
+		
         // POR IMPLEMENTAR		
+		
+		//JButton metodo Propierty para asignar propiedad al boton y saber asi en que lugar de la matriz se encuentra
 	} // end anyadeGrid
 	
 
@@ -134,7 +171,13 @@ public class Juego {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-	        // POR IMPLEMENTAR	
+			String opcion=e.getActionCommand();
+			switch(opcion){
+			case"salir":
+				System.exit(0);
+			}
+			
+			// POR IMPLEMENTAR	
 		} // end actionPerformed
 		
 	} // end class MenuListener
