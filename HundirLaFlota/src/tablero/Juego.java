@@ -51,6 +51,7 @@ public class Juego {
 		anyadeMenu();
 		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
 		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+		anyadePanelEstado("Intentos: 0   Barcos restantes: 6");
 		frame.setSize(400, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -81,10 +82,12 @@ public class Juego {
 		menu.add(salir);
 		
 		JMenuItem nuevaPartida = new JMenuItem("Nueva partida");
+		nuevaPartida.setActionCommand("nueva");
 		nuevaPartida.addActionListener(e);
 		menu.add(nuevaPartida);
 		
 		JMenuItem solucion = new JMenuItem("Mostrar solución");
+		solucion.setActionCommand("solucion");
 		solucion.addActionListener(e);
 		menu.add(solucion);
 		
@@ -146,7 +149,10 @@ public class Juego {
 	 * @param cadena	cadena inicial del panel de estado
 	 */
 	private void anyadePanelEstado(String cadena) {	
-        // POR IMPLEMENTAR
+		JPanel panelEstado = new JPanel();
+		estado = new JLabel(cadena);
+		panelEstado.add(estado);
+		frame.add(panelEstado);
 	} // end anyadePanel Estado
 	
 	/**
@@ -154,7 +160,7 @@ public class Juego {
 	 * @param cadenaEstado	nuevo estado
 	 */
 	private void cambiaEstado(String cadenaEstado) {
-        // POR IMPLEMENTAR
+		estado.setText(cadenaEstado);
 	} // end cambiaEstado
 	
 	/**
@@ -188,6 +194,16 @@ public class Juego {
 			switch(opcion){
 			case"salir":
 				System.exit(0);
+				break;
+			
+			case "nueva":
+				limpiaTablero();
+				break;
+			
+			case "solucion":
+				muestraSolucion();
+				break;
+				
 			}
 			
 			// POR IMPLEMENTAR	
