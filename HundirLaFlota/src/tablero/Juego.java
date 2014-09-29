@@ -49,6 +49,7 @@ public class Juego {
 		frame = new JFrame();
 		frame.setVisible(true);
 		anyadeMenu();
+		anyadePanelEstado("Intentos: 0   Barcos restantes: 6");
 		frame.setSize(400, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	} // end ejecuta
@@ -133,7 +134,10 @@ public class Juego {
 	 * @param cadena	cadena inicial del panel de estado
 	 */
 	private void anyadePanelEstado(String cadena) {	
-        // POR IMPLEMENTAR
+		JPanel estado = new JPanel();
+		JLabel textoEstado = new JLabel(cadena);
+		estado.add(textoEstado);
+		frame.add(estado);
 	} // end anyadePanel Estado
 	
 	/**
