@@ -49,8 +49,11 @@ public class Juego {
 		frame = new JFrame();
 		frame.setVisible(true);
 		anyadeMenu();
+		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
+		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
 		frame.setSize(400, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	} // end ejecuta
 	
 	/**
@@ -97,6 +100,8 @@ public class Juego {
 		Container casillas= frame.getContentPane();
 		casillas.setLayout(new GridLayout(NUMFILAS+1, NUMCOLUMNAS+2));
 		String[] vectorLetras={"A","B","C","D","E","F","G","H"};
+		ButtonListener e=new ButtonListener();
+		buttons=new JButton[NUMFILAS][NUMCOLUMNAS];
 		
 		casillas.add(new JLabel(""));
 		casillas.add(new JLabel("1"));
@@ -114,13 +119,21 @@ public class Juego {
 			for(int j=0;j<NUMCOLUMNAS+2;j++){
 				if(j==0){
 					casillas.add(new JLabel(vectorLetras[i]));
+					continue;
 				}
 				if(j==NUMCOLUMNAS+1){
 					casillas.add(new JLabel(vectorLetras[i]));
+					continue;
 				}
-				//Hola
+				JButton boton=new JButton();
+				int [] posicion={i,j-1};
+				boton.addActionListener(e);
+				boton.putClientProperty(posicion,posicion);
+				buttons [i][j-1]=boton;
+				casillas.add(boton);
 			}
 		}
+		
 		
         // POR IMPLEMENTAR		
 		

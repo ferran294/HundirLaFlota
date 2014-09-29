@@ -39,6 +39,12 @@ public class Partida {
 		numBarcos = nb;
 		
 		mar = new int [nf] [nc];
+		for(int i=0;i<nf;i++){
+			for(int j=0;j<nc;j++){
+				mar[i][j]=AGUA;
+			}
+		}
+		barcos=new Vector<Barco>();
 		disparos = 0;
 		quedan = 6;
 		
@@ -220,5 +226,8 @@ public class Partida {
         return resultado;
     }
     
+    public int getValor(int fil,int col){
+    	return mar[fil][col];
+    }
     
 } // end class Partida
