@@ -47,6 +47,7 @@ public class Juego {
 		// POR IMPLEMENTAR
 		
 		frame = new JFrame();
+		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		anyadeMenu();
 		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
@@ -100,8 +101,7 @@ public class Juego {
 	 * @param nc	numero de columnas
 	 */
 	private void anyadeGrid(int nf, int nc) {
-		Container casillas= frame.getContentPane();
-		casillas.setLayout(new GridLayout(NUMFILAS+1, NUMCOLUMNAS+2));
+		JPanel casillas= new JPanel(new GridLayout(NUMFILAS+1, NUMCOLUMNAS+2));
 		String[] vectorLetras={"A","B","C","D","E","F","G","H"};
 		ButtonListener e=new ButtonListener();
 		buttons=new JButton[NUMFILAS][NUMCOLUMNAS];
@@ -136,7 +136,7 @@ public class Juego {
 				casillas.add(boton);
 			}
 		}
-		
+		frame.getContentPane().add(casillas, BorderLayout.CENTER);
 		
         // POR IMPLEMENTAR		
 		
@@ -152,7 +152,7 @@ public class Juego {
 		JPanel panelEstado = new JPanel();
 		estado = new JLabel(cadena);
 		panelEstado.add(estado);
-		frame.add(panelEstado);
+		frame.getContentPane().add(panelEstado, BorderLayout.SOUTH);
 	} // end anyadePanel Estado
 	
 	/**
