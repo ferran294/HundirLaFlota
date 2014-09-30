@@ -220,8 +220,6 @@ public class Partida {
         return resultado;
     }
     
-    public int getValor(int fil,int col){
-    	return mar[fil][col];
-    }
+   
     
 } // end class Partida

@@ -188,7 +188,13 @@ public class Juego {
 	 * Limpia las casillas del tablero
 	 */
 	private void limpiaTablero() {
-        // POR IMPLEMENTAR
+       for (int i = 0; i < NUMFILAS; i++) {
+    	   for (int j = 0; j < NUMCOLUMNAS; j++) {
+			buttons[i][j].setBackground(null);
+    	   }	
+	}
+		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+
 	} // end limpiaTablero
 
 	
