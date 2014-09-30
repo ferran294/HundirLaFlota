@@ -51,9 +51,7 @@ public class Juego {
 		frame.setVisible(true);
 		anyadeMenu();
 		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
-		System.out.println("antes de partida");
 		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
-		System.out.println("despues de partida");
 		anyadePanelEstado("Intentos: 0   Barcos restantes: 6");
 		frame.setSize(400, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

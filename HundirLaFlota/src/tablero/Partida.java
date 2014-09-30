@@ -47,7 +47,6 @@ public class Partida {
 		barcos=new Vector<Barco>();
 		disparos = 0;
 		quedan = 6;
-		
 		ponBarcos();
 	}
 	
@@ -150,7 +149,6 @@ public class Partida {
         boolean ok = false;
         int fila = 0, col = 0;
         Random random = new Random(); // Para generar aleatoriamente la orientacion y posicion de los barcos
-        
         // Itera hasta que encuentra hueco para colocar el barco cumpliendo las restricciones
         while (!ok) {
         	// Primero genera aleatoriamente la orientacion del barco
@@ -184,6 +182,7 @@ public class Partida {
                 }
             } // end if H o V
         } // end while
+        System.out.println("barcooo");
         return new Barco(fila, col, orientacion, tam);
 	}
 	
