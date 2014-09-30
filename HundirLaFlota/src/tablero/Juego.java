@@ -131,7 +131,7 @@ public class Juego {
 				JButton boton=new JButton();
 				int [] posicion={i,j-1};
 				boton.addActionListener(e);
-				boton.putClientProperty(posicion,posicion);
+				boton.putClientProperty("posicion",posicion);
 				buttons [i][j-1]=boton;
 				casillas.add(boton);
 			}
@@ -171,7 +171,7 @@ public class Juego {
 		
 		for(int i=0;i<NUMFILAS;i++){
 			for (int j = 0; j < NUMCOLUMNAS; j++) {
-				System.out.println("hecho");
+				//System.out.println("hecho");
 				int valor=partida.pruebaCasilla(i, j);
 				if(valor==AGUA){
 					buttons[i][j].setBackground(Color.blue);
@@ -220,7 +220,6 @@ public class Juego {
 				
 			}
 			
-			// POR IMPLEMENTAR	
 		} // end actionPerformed
 		
 	} // end class MenuListener
@@ -239,6 +238,40 @@ public class Juego {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 	        // POR IMPLEMENTAR
+			JButton boton = (JButton) e.getSource();
+			int [] pos = (int[]) boton.getClientProperty("posicion");
+			
+			int valor = partida.pruebaCasilla(pos[0], pos[1]);
+			
+			if(valor == AGUA)
+				boton.setBackground(Color.blue);
+			
+			else if(valor == TOCADO)
+				boton.setBackground(Color.yellow);
+			
+			else {
+				String[] datosBarco = partida.getBarco(valor).split("#");	//Obtenemos un vector con las propiedades del Barco
+				int fi = Integer.parseInt(datosBarco[0]);
+				int ci = Integer.parseInt(datosBarco[1]);
+				int t = Integer.parseInt(datosBarco[3]);
+				
+				if(datosBarco[2] == "V") {
+					for(int i = 0; i < t; i++) {
+						buttons[fi++][ci].setBackground(Color.red);
+					}
+				} else {
+					for(int i = 0; i < t; i++) {
+						buttons[fi][ci++].setBackground(Color.red);
+					}
+				}
+				
+				quedan--;
+			}
+			
+			disparos++;
+			cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
+			boton.setEnabled(false);
+			
 		} // end actionPerformed
 
 		

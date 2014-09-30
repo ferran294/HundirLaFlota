@@ -41,7 +41,7 @@ public class Partida {
 		mar = new int [nf] [nc];
 		for(int i=0;i<nf;i++){
 			for(int j=0;j<nc;j++){
-				mar[i][j]=0;
+				mar[i][j]= AGUA;
 			}
 		}
 		barcos=new Vector<Barco>();
@@ -60,39 +60,34 @@ public class Partida {
     	if (mar[f][c] == TOCADO || mar[f][c] == HUNDIDO || mar[f][c] == AGUA) {
     		return mar[f][c];
     	} else {
-    		if (mar[f][c] == 0)
-    			return AGUA;
-    		
-    		else {
-    			int idBarco = mar[f][c];
-    			Barco barco = barcos.get(idBarco);
- 				barco.tocaBarco();
+    		int idBarco = mar[f][c];
+    		Barco barco = barcos.get(idBarco);
+ 			barco.tocaBarco();
+			
+			if(barco.getTamanyo() == barco.getTocadas()) {
+				//El barco se hunde, cambiar todas las casillas del barco a HUNDIDO y devolover el id del barco.
+				int fila = barco.getFilaInicial();
+				int col = barco.getColumnaInicial();
+				int tam = barco.getTamanyo();
+				char orientacion = barco.getOrientacion();
 				
- 				if(barco.getTamanyo() == barco.getTocadas()) {
-					//El barco se hunde, cambiar todas las casillas del barco a HUNDIDO y devolover el id del barco.
-					int fila = barco.getFilaInicial();
-					int col = barco.getColumnaInicial();
-					int tam = barco.getTamanyo();
-					char orientacion = barco.getOrientacion();
-					
-					if (orientacion == 'H') {
-						for(int i = 0; i < tam; i++) {
-							mar[fila][col++] = HUNDIDO;
-						}
+				if (orientacion == 'H') {
+					for(int i = 0; i < tam; i++) {
+						mar[fila][col++] = HUNDIDO;
 					}
-				
-					else {
-						for(int i = 0; i < tam; i++) {
-							mar[fila++][col] = HUNDIDO;
-						}
-					}
-				
-					return idBarco;
-				} else {
-					//El barco es tocado.
-					mar[f][c] = TOCADO;
-					return TOCADO;
 				}
+			
+				else {
+					for(int i = 0; i < tam; i++) {
+						mar[fila++][col] = HUNDIDO;
+					}
+				}
+			
+				return idBarco;
+			} else {
+				//El barco es tocado.
+				mar[f][c] = TOCADO;
+				return TOCADO;
 			}
 		}
     }
