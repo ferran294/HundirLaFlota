@@ -41,7 +41,7 @@ public class Partida {
 		mar = new int [nf] [nc];
 		for(int i=0;i<nf;i++){
 			for(int j=0;j<nc;j++){
-				mar[i][j]=AGUA;
+				mar[i][j]=0;
 			}
 		}
 		barcos=new Vector<Barco>();
