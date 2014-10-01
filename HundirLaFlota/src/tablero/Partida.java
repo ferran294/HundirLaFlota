@@ -46,8 +46,10 @@ public class Partida {
 		}
 		barcos=new Vector<Barco>();
 		disparos = 0;
-		quedan = 6;
+		
 		ponBarcos();
+		
+		quedan = barcos.size();
 	}
 	
 	/**
@@ -57,6 +59,8 @@ public class Partida {
 	 * @return		resultado de marcar la casilla: AGUA, ya TOCADO, ya HUNDIDO, identidad del barco recien hundido
 	 */	
     public int pruebaCasilla(int f, int c) {
+    	disparos++;
+    	
     	if (mar[f][c] == TOCADO || mar[f][c] == HUNDIDO || mar[f][c] == AGUA) {
     		return mar[f][c];
     	} else {
@@ -66,6 +70,7 @@ public class Partida {
 			
 			if(barco.getTamanyo() == barco.getTocadas()) {
 				//El barco se hunde, cambiar todas las casillas del barco a HUNDIDO y devolover el id del barco.
+				//Restar uno a quedan.
 				int fila = barco.getFilaInicial();
 				int col = barco.getColumnaInicial();
 				int tam = barco.getTamanyo();
@@ -73,16 +78,17 @@ public class Partida {
 				
 				if (orientacion == 'H') {
 					for(int i = 0; i < tam; i++) {
-						mar[fila][col++] = HUNDIDO;
+						mar[fila][col + i] = HUNDIDO;
 					}
 				}
 			
 				else {
 					for(int i = 0; i < tam; i++) {
-						mar[fila++][col] = HUNDIDO;
+						mar[fila + i][col] = HUNDIDO;
 					}
 				}
-			
+				quedan--;
+				
 				return idBarco;
 			} else {
 				//El barco es tocado.
@@ -151,11 +157,8 @@ public class Partida {
             	// Ahora genera aleatoriamente la posicion del barco
                 col = random.nextInt(numColumnas + 1 - tam); // resta tam para asegurar que cabe
                 fila = random.nextInt(numFilas);
-
-                /******************************************************************************************/
-            	/*****************************     GETTERS y SETTERS    ***********************************/
-            	/******************************************************************************************/
-            	     // Comprueba si cabe a partir de la posicion generada con mar o borde alrededor
+                
+                // Comprueba si cabe a partir de la posicion generada con mar o borde alrededor
                 if (librePosiciones(fila, col, tam+1, 'H')) {
                 	// Coloca el barco en el mar
                     for (int i = 0; i < tam; i++) {
@@ -220,6 +223,15 @@ public class Partida {
         return resultado;
     }
     
-   
+    /******************************************************************************************/
+	/*****************************     GETTERS y SETTERS    ***********************************/
+	/******************************************************************************************/
     
+    public int getQuedan() {
+    	return quedan;
+    }
+    
+    public int getDisparos() {
+    	return disparos;
+    }
 } // end class Partida
