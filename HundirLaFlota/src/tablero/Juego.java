@@ -45,16 +45,8 @@ public class Juego {
 	private void ejecuta() {
        
 		// POR IMPLEMENTAR
+		dibujaTablero();
 		
-		frame = new JFrame();
-		frame.setLayout(new BorderLayout());
-		frame.setVisible(true);
-		anyadeMenu();
-		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
-		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
-		anyadePanelEstado("Intentos: 0   Barcos restantes: 6");
-		frame.setSize(400, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	} // end ejecuta
 	
@@ -62,7 +54,16 @@ public class Juego {
 	 * Dibuja el tablero de juego y crea la partida inicial
 	 */
 	private void dibujaTablero() {
-        // PUTA
+		frame = new JFrame();
+		frame.setLayout(new BorderLayout());
+		frame.setVisible(true);
+		anyadeMenu();
+		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
+		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+		anyadePanelEstado("Intentos: 0   Barcos restantes: 6");
+		frame.setSize(500, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	} // end dibujaTablero
 	
 	/**
@@ -107,25 +108,25 @@ public class Juego {
 		buttons=new JButton[NUMFILAS][NUMCOLUMNAS];
 		
 		casillas.add(new JLabel(""));
-		casillas.add(new JLabel("1"));
-		casillas.add(new JLabel("2"));
-		casillas.add(new JLabel("3"));
-		casillas.add(new JLabel("4"));
-		casillas.add(new JLabel("5"));
-		casillas.add(new JLabel("6"));
-		casillas.add(new JLabel("7"));
-		casillas.add(new JLabel("8"));
+		casillas.add(new JLabel("1",JLabel.CENTER));
+		casillas.add(new JLabel("2",JLabel.CENTER));
+		casillas.add(new JLabel("3",JLabel.CENTER));
+		casillas.add(new JLabel("4",JLabel.CENTER));
+		casillas.add(new JLabel("5",JLabel.CENTER));
+		casillas.add(new JLabel("6",JLabel.CENTER));
+		casillas.add(new JLabel("7",JLabel.CENTER));
+		casillas.add(new JLabel("8",JLabel.CENTER));
 		casillas.add(new JLabel(""));
 		
 		
 		for(int i=0;i<NUMFILAS;i++){
 			for(int j=0;j<NUMCOLUMNAS+2;j++){
 				if(j==0){
-					casillas.add(new JLabel(vectorLetras[i]));
+					casillas.add(new JLabel(vectorLetras[i],JLabel.CENTER));
 					continue;
 				}
 				if(j==NUMCOLUMNAS+1){
-					casillas.add(new JLabel(vectorLetras[i]));
+					casillas.add(new JLabel(vectorLetras[i],JLabel.CENTER));
 					continue;
 				}
 				JButton boton=new JButton();
@@ -178,6 +179,7 @@ public class Juego {
 				}else{
 					buttons[i][j].setBackground(Color.red);
 				}
+				buttons[i][j].setEnabled(false);
 			}
 		}
 		
@@ -191,6 +193,7 @@ public class Juego {
        for (int i = 0; i < NUMFILAS; i++) {
     	   for (int j = 0; j < NUMCOLUMNAS; j++) {
 			buttons[i][j].setBackground(null);
+			buttons[i][j].setEnabled(true);
     	   }	
 	}
 		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
