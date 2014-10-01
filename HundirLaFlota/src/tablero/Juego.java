@@ -43,11 +43,14 @@ public class Juego {
 	 * Lanza una nueva hebra que establece los atributos del juego y dibuja la interfaz grafica: tablero
 	 */
 	private void ejecuta() {
-       
-		// POR IMPLEMENTAR
-		dibujaTablero();
-		
-		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				dibujaTablero();
+				
+			}
+		});
 	} // end ejecuta
 	
 	/**
@@ -57,10 +60,18 @@ public class Juego {
 		frame = new JFrame();
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
+		
 		anyadeMenu();
+		
 		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
+		
 		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
-		anyadePanelEstado("Intentos: 0   Barcos restantes: 6");
+		
+		disparos = partida.getDisparos();
+		quedan = partida.getQuedan();
+		
+		anyadePanelEstado("Intentos: " + disparos + " Barcos restantes: " + quedan);
+		
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -168,7 +179,6 @@ public class Juego {
 	 * Muestra la solucion de la partida y marca la partida como finalizada
 	 */
 	private void muestraSolucion() {
-        // POR IMPLEMENTAR
 		
 		for(int i=0;i<NUMFILAS;i++){
 			for (int j = 0; j < NUMCOLUMNAS; j++) {
@@ -195,8 +205,14 @@ public class Juego {
 			buttons[i][j].setBackground(null);
 			buttons[i][j].setEnabled(true);
     	   }	
-	}
-		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+       }
+       partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+       
+       //Actualizamos los atributos que se habrán reiniciado y actualizamos el estado.
+       disparos = partida.getDisparos();
+       quedan = partida.getQuedan();
+       
+       cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
 
 	} // end limpiaTablero
 
@@ -246,7 +262,7 @@ public class Juego {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-	        // POR IMPLEMENTAR
+	        //Obtenemos el botón pulsado y su posición.
 			JButton boton = (JButton) e.getSource();
 			int [] pos = (int[]) boton.getClientProperty("posicion");
 			
@@ -259,26 +275,38 @@ public class Juego {
 				boton.setBackground(Color.yellow);
 			
 			else {
+				//El barco se hunde.
+				//Obtenemos la cadena con su información y la utilizamos para averiguar que casillas tenemos que cambiar de color.
+				//Actualizamos el valor de quedan que habrá sido reducido en 1.
+				
 				String[] datosBarco = partida.getBarco(valor).split("#");	//Obtenemos un vector con las propiedades del Barco
 				int fi = Integer.parseInt(datosBarco[0]);
 				int ci = Integer.parseInt(datosBarco[1]);
 				int t = Integer.parseInt(datosBarco[3]);
 				
-				if(datosBarco[2] == "V") {
+				if(datosBarco[2].equals("V")) {
 					for(int i = 0; i < t; i++) {
-						buttons[fi++][ci].setBackground(Color.red);
+						buttons[fi + i][ci].setBackground(Color.red);
 					}
 				} else {
 					for(int i = 0; i < t; i++) {
-						buttons[fi][ci++].setBackground(Color.red);
+						buttons[fi][ci + i].setBackground(Color.red);
+						
 					}
 				}
-				
-				quedan--;
+				quedan = partida.getQuedan();
+					
 			}
 			
-			disparos++;
+			disparos = partida.getDisparos();
+			
+			//Si ya no quedan barcos la partida termina.
+			if(quedan == 0)
+				muestraSolucion();
+			
 			cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
+			
+			//Deshabilitamos el botón para que si vuelve a ser pulsado no suceda nada.
 			boton.setEnabled(false);
 			
 		} // end actionPerformed
