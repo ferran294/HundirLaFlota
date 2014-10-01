@@ -36,7 +36,7 @@ public class Juego {
 	public static void main(String[] args) {
 		Juego juego = new Juego();
 		juego.ejecuta();
-	} // end main
+	} 
 	
 	/**
 	 * Lanza una nueva hebra que establece los atributos del juego y dibuja la interfaz grafica: tablero
@@ -50,7 +50,7 @@ public class Juego {
 				
 			}
 		});
-	} // end ejecuta
+	} 
 	
 	/**
 	 * Dibuja el tablero de juego y crea la partida inicial
@@ -60,11 +60,11 @@ public class Juego {
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		
-		anyadeMenu();
+		anyadeMenu();	//Invoca al metodo que anyade los botones del menu
 		
-		anyadeGrid(NUMFILAS, NUMCOLUMNAS);
+		anyadeGrid(NUMFILAS, NUMCOLUMNAS);  //Invoca al metodo que anyade los botones del mar
 		
-		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);  //Crea una partida nueva 
 		
 		disparos = partida.getDisparos();
 		quedan = partida.getQuedan();
@@ -74,7 +74,7 @@ public class Juego {
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-	} // end dibujaTablero
+	} 
 	
 	/**
 	 * Anyade el menu de opciones del juego
@@ -105,7 +105,7 @@ public class Juego {
 		solucion.addActionListener(e);
 		menu.add(solucion);
 		
-	} // end anyadeMenu
+	} 
 
 	/**
 	 * Anyade el panel con las casillas del mar y sus etiquetas.
@@ -119,6 +119,8 @@ public class Juego {
 		ButtonListener e=new ButtonListener();
 		buttons=new JButton[NUMFILAS][NUMCOLUMNAS];
 		
+		
+		//Anyade la primerqa fila con los numeros
 		casillas.add(new JLabel(""));
 		casillas.add(new JLabel("1",JLabel.CENTER));
 		casillas.add(new JLabel("2",JLabel.CENTER));
@@ -134,25 +136,24 @@ public class Juego {
 		for(int i=0;i<NUMFILAS;i++){
 			for(int j=0;j<NUMCOLUMNAS+2;j++){
 				if(j==0){
-					casillas.add(new JLabel(vectorLetras[i],JLabel.CENTER));
+					casillas.add(new JLabel(vectorLetras[i],JLabel.CENTER));  //Anyade la letra correspondiente al numero de fila
 					continue;
 				}
 				if(j==NUMCOLUMNAS+1){
-					casillas.add(new JLabel(vectorLetras[i],JLabel.CENTER));
+					casillas.add(new JLabel(vectorLetras[i],JLabel.CENTER));  //Anyade la letra correspondiente al numero de fila
 					continue;
 				}
 				JButton boton=new JButton();
-				int [] posicion={i,j-1};
+				int [] posicion={i,j-1};    //Guarda la posicion del boton que ocupa en la matriz
 				boton.addActionListener(e);
-				boton.putClientProperty("posicion",posicion);
-				buttons [i][j-1]=boton;
-				casillas.add(boton);
+				boton.putClientProperty("posicion",posicion);	//Asigna la posicion del boton en la matriz al propio boton
+				buttons [i][j-1]=boton;		//Anyade el boton a la matriz de botones
+				casillas.add(boton);		//Anyade el boton al panel Grid
 			}
 		}
 		frame.getContentPane().add(casillas, BorderLayout.CENTER);	
 		
-		//JButton metodo Propierty para asignar propiedad al boton y saber asi en que lugar de la matriz se encuentra
-	} // end anyadeGrid
+	} 
 	
 
 	/**
@@ -164,7 +165,7 @@ public class Juego {
 		estado = new JLabel(cadena);
 		panelEstado.add(estado);
 		frame.getContentPane().add(panelEstado, BorderLayout.SOUTH);
-	} // end anyadePanel Estado
+	} 
 	
 	/**
 	 * Cambia la cadena mostrada en el panel de estado
@@ -172,12 +173,13 @@ public class Juego {
 	 */
 	private void cambiaEstado(String cadenaEstado) {
 		estado.setText(cadenaEstado);
-	} // end cambiaEstado
+	} 
 	
 	/**
 	 * Muestra la solucion de la partida y marca la partida como finalizada
 	 */
 	private void muestraSolucion() {
+		//Recorre la matriz de botones y cambia el color del boton segun el valor que tiene el mar en la misma posicion
 		
 		for(int i=0;i<NUMFILAS;i++){
 			for (int j = 0; j < NUMCOLUMNAS; j++) {
@@ -188,21 +190,22 @@ public class Juego {
 				}else{
 					buttons[i][j].setBackground(Color.red);
 				}
-				buttons[i][j].setEnabled(false);
+				buttons[i][j].setEnabled(false);	//Deshabilita el boton
 			}
 		}
 		
 		
-	} // end muestraSolucion
+	} 
 	
 	/**
 	 * Limpia las casillas del tablero
 	 */
 	private void limpiaTablero() {
+		//Recorre la matriz de botones y recupera el color original del boton
        for (int i = 0; i < NUMFILAS; i++) {
     	   for (int j = 0; j < NUMCOLUMNAS; j++) {
 			buttons[i][j].setBackground(null);
-			buttons[i][j].setEnabled(true);
+			buttons[i][j].setEnabled(true);	//Vuelve a habilitar el boton
     	   }	
        }
        partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
@@ -213,7 +216,7 @@ public class Juego {
        
        cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
 
-	} // end limpiaTablero
+	} 
 
 	
 /******************************************************************************************/
@@ -244,9 +247,8 @@ public class Juego {
 				
 			}
 			
-		} // end actionPerformed
-		
-	} // end class MenuListener
+		} 
+	} 
 	
 
 /******************************************************************************************/
