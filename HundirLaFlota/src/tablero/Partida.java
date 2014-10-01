@@ -33,7 +33,6 @@ public class Partida {
 	 * @param   nc  numero de barcos
 	 */
 	public Partida(int nf, int nc, int nb) {
-        // POR IMPLEMENTAR
 		numFilas = nf;
 		numColumnas = nc;
 		numBarcos = nb;

@@ -88,6 +88,8 @@ public class Juego {
 		JMenu menu = new JMenu("Opciones");
 		mb.add(menu);
 		
+		//Añadimos las 3 opciones al menu, les asignamos el escuchador y la acción que realizan.
+		
 		JMenuItem salir = new JMenuItem("Salir");
 		salir.setActionCommand("salir");
 		salir.addActionListener(e);
@@ -147,9 +149,7 @@ public class Juego {
 				casillas.add(boton);
 			}
 		}
-		frame.getContentPane().add(casillas, BorderLayout.CENTER);
-		
-        // POR IMPLEMENTAR		
+		frame.getContentPane().add(casillas, BorderLayout.CENTER);	
 		
 		//JButton metodo Propierty para asignar propiedad al boton y saber asi en que lugar de la matriz se encuentra
 	} // end anyadeGrid
@@ -181,7 +181,7 @@ public class Juego {
 		
 		for(int i=0;i<NUMFILAS;i++){
 			for (int j = 0; j < NUMCOLUMNAS; j++) {
-				//System.out.println("hecho");
+ 
 				int valor=partida.pruebaCasilla(i, j);
 				if(valor==AGUA){
 					buttons[i][j].setBackground(Color.blue);
