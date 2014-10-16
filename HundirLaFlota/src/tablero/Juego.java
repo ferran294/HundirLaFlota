@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import partida.Partida;
+
 
 public class Juego {
 	
