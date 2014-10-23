@@ -309,7 +309,7 @@ public class ClienteFlotaSockets {
 					JButton boton = (JButton) e.getSource();
 					int [] pos = (int[]) boton.getClientProperty("posicion");
 					
-					int valor = partida.pruebaCasilla(pos[0], pos[1]);
+					int valor = auxiliarCliente.pruebaCasilla(pos[0], pos[1]);
 					
 					if(valor == AGUA)
 						boton.setBackground(Color.blue);
@@ -322,7 +322,7 @@ public class ClienteFlotaSockets {
 						//Obtenemos la cadena con su información y la utilizamos para averiguar que casillas tenemos que cambiar de color.
 						//Actualizamos el valor de quedan que habrá sido reducido en 1.
 						
-						String[] datosBarco = partida.getBarco(valor).split("#");	//Obtenemos un vector con las propiedades del Barco
+						String[] datosBarco = auxiliarCliente.getBarco(valor).split("#");	//Obtenemos un vector con las propiedades del Barco
 						int fi = Integer.parseInt(datosBarco[0]);
 						int ci = Integer.parseInt(datosBarco[1]);
 						int t = Integer.parseInt(datosBarco[3]);
@@ -337,11 +337,11 @@ public class ClienteFlotaSockets {
 								
 							}
 						}
-						quedan = partida.getQuedan();
+						quedan = auxiliarCliente.getQuedan();
 							
 					}
 					
-					disparos = partida.getDisparos();
+					disparos = auxiliarCliente.getDisparos();
 					
 					//Si ya no quedan barcos la partida termina.
 					if(quedan == 0)
@@ -350,7 +350,7 @@ public class ClienteFlotaSockets {
 					cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
 					
 					//Deshabilitamos el botón para que si vuelve a ser pulsado no suceda nada.
-					boton.setEnabled(false);
+					//boton.setEnabled(false);
 					
 				} // end actionPerformed
 
