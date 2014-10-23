@@ -277,7 +277,9 @@ public class Juego {
 			else if(valor == TOCADO)
 				boton.setBackground(Color.yellow);
 			
-			else {
+			
+			
+			else if(valor != HUNDIDO){
 				//El barco se hunde.
 				//Obtenemos la cadena con su información y la utilizamos para averiguar que casillas tenemos que cambiar de color.
 				//Actualizamos el valor de quedan que habrá sido reducido en 1.
@@ -310,7 +312,7 @@ public class Juego {
 			cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
 			
 			//Deshabilitamos el botón para que si vuelve a ser pulsado no suceda nada.
-			boton.setEnabled(false);
+			//boton.setEnabled(false);
 			
 		} // end actionPerformed
 
