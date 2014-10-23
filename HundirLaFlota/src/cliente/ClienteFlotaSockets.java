@@ -326,7 +326,7 @@ public class ClienteFlotaSockets {
 						else if(valor == TOCADO)
 							boton.setBackground(Color.yellow);
 						
-						else {
+						else if(valor != HUNDIDO){ //Si el barco no está hundido, no hay que hacer nada, solo incrementar los disparos.
 							//El barco se hunde.
 							//Obtenemos la cadena con su información y la utilizamos para averiguar que casillas tenemos que cambiar de color.
 							//Actualizamos el valor de quedan que habrá sido reducido en 1.
@@ -360,10 +360,7 @@ public class ClienteFlotaSockets {
 						muestraSolucion();
 					
 					cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
-					
-					//Deshabilitamos el botón para que si vuelve a ser pulsado no suceda nada.
-					//boton.setEnabled(false);
-					
+				
 				} // end actionPerformed
 
 				
