@@ -116,6 +116,7 @@ public class AuxiliarClienteFlota {
 	   for(int i=0;i<numBarcos;i++){
 		   resultado[i]=mySocket.receiveMessage();
 	   }
+	   
 	   return resultado; 
 	   
     } // end getSolucion

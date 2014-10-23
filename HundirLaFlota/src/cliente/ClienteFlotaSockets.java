@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+
+import partida.Partida;
+
 public class ClienteFlotaSockets {
 	
 	// Sustituye esta clase por tu versión de la clase Juego de la práctica 1
@@ -17,5 +20,7 @@ public class ClienteFlotaSockets {
 	// por llamadas al objeto de la clase AuxiliarClienteFlota.
 	// Los métodos a llamar tendrán la misma signatura.
 	
-
+	
+	
+	
 }
