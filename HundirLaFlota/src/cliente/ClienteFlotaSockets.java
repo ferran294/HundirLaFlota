@@ -210,7 +210,7 @@ public class ClienteFlotaSockets {
 	 * Muestra la solucion de la partida y marca la partida como finalizada
 	 */
 	private void muestraSolucion() {
-		//Recorre la matriz de botones y cambia el color del boton segun el valor que tiene el mar en la misma posicion
+		//Recorre la matriz de botones y cambia el color del boton a azul
 		try {
 			String[] solucion=auxiliarCliente.getSolucion();
 			for(int i=0;i<NUMFILAS;i++){
@@ -219,13 +219,14 @@ public class ClienteFlotaSockets {
 					buttons[i][j].setEnabled(false);	//Deshabilita el boton
 				}
 			}
-			
+			//Recorre el vector de la solucion devuelta por el servidor
 			for(int i=0;i<solucion.length;i++){
-				String[] barcoInfo=solucion[i].split("#");
-				int fi = Integer.parseInt(barcoInfo[0]);
-				int ci = Integer.parseInt(barcoInfo[1]);
-				int t = Integer.parseInt(barcoInfo[3]);
-				if(barcoInfo[2].equals("V")){
+				String[] barcoInfo=solucion[i].split("#"); 
+				int fi = Integer.parseInt(barcoInfo[0]); //fila inicial del barco
+				int ci = Integer.parseInt(barcoInfo[1]); //columna inicial del barco
+				int t = Integer.parseInt(barcoInfo[3]); //tamanyo
+				
+				if(barcoInfo[2].equals("V")){ //Mira si es vertical o horizontal para pintar la solucion
 					for(int j=0;j<t;i++){
 						buttons[fi + j][ci].setBackground(Color.red);
 					}
