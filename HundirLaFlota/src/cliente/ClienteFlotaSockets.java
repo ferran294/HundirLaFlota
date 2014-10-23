@@ -221,7 +221,14 @@ public class ClienteFlotaSockets {
 				int ci = Integer.parseInt(barcoInfo[1]);
 				int t = Integer.parseInt(barcoInfo[3]);
 				if(barcoInfo[2].equals("V")){
-					
+					for(int j=0;j<t;i++){
+						buttons[fi + j][ci].setBackground(Color.red);
+					}
+				}else{
+					for(int j = 0; j < t; i++) {
+						buttons[fi][ci + j].setBackground(Color.red);
+						
+					}
 				}
 				
 			}
@@ -246,6 +253,8 @@ public class ClienteFlotaSockets {
 			buttons[i][j].setEnabled(true);	//Vuelve a habilitar el boton
     	   }	
        }
+       
+       
        try {
 		auxiliarCliente.nuevaPartida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
 	} catch (IOException e) {
