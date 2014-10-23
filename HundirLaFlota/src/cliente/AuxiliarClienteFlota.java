@@ -122,6 +122,27 @@ public class AuxiliarClienteFlota {
 	   
     } // end getSolucion
    
+   /**
+    * Usa el socket enviar al servidor una peticion para saber el numero de barcos que quedan por un hundir con el formato : "5"
+    * @return resultado devuelto por el metodo getQuedan de la clase Partida
+    * @throws IOException
+    */
+   
+   public int getQuedanBarcos() throws IOException{
+	   mySocket.sendMessage("5");
+	   int quedanBarcos=Integer.parseInt(mySocket.receiveMessage());
+	   return quedanBarcos;
+   }
 
+   /**
+    * Usa el socket para enviar al servidor una peticion para saber el numero de disparos que se han realizado con el formato:"6"
+    * @return resultado devuelto por el metodo getDisparos de la clase partida
+    * @throws IOException
+    */
 
+   public int getDisparos() throws IOException{
+	   mySocket.sendMessage("6");
+	   int disparos=Integer.parseInt(mySocket.receiveMessage());
+	   return disparos;
+   }
 } //end class
