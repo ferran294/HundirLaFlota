@@ -61,12 +61,17 @@ class HiloServidorFlota implements Runnable {
             	 break;
              }
              case 3: { // Obtiene los datos de un barco y se los devuelve al cliente
-            	 // ... 
+            	 String respuesta = partida.getBarco(Integer.parseInt(op[1]));
+            	 myDataSocket.sendMessage(respuesta);
                  break;
              }
              case 4: { // Devuelve al cliente la solucion en forma de vector de cadenas
-        	   // Primero envia el numero de barcos 
+            	 String[] solucion = partida.getSolucion();
+               // Primero envia el numero de barcos 
+            	 myDataSocket.sendMessage("" + solucion.length);
                // Despues envia una cadena por cada barco
+            	 for (int i = 0; i < solucion.length; i++)
+            		 myDataSocket.sendMessage(solucion[i]);
                break;
              }
          } // fin switch
