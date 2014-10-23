@@ -22,5 +22,30 @@ public class ServidorFlotaSockets {
 
 	  // Revisad el apartado 5.5 del libro de Liu
  
+	   int puertoServidor = 1234; //Puerto por defecto.
+	   
+	   if(args.length == 1) {
+		   puertoServidor = Integer.parseInt(args[0]);
+	   }
+	   
+	   try {
+		   //Instaciar un socket stream que acepte las conexiones.
+		   ServerSocket miSocketConexion = new ServerSocket(puertoServidor);
+		   System.out.println("Servidor Hundir la Flota listo.");
+		   
+		   while(true) { //Bucle infinito: espera a que se solicite una conexión y la acepta.
+			   System.out.println("Esperando conexión.");
+			   
+			   MyStreamSocket miSocketDatos = new MyStreamSocket(miSocketConexion.accept());
+			   System.out.println("Conexión aceptada.");
+			   
+			   //Crea y arranca un hilo para la sesión con este cliente.
+			   Thread hilo = new Thread(new HiloServidorFlota(miSocketDatos));
+			   hilo.start();
+		   }
+		   
+	   } catch (Exception ex) {
+		   ex.printStackTrace();
+	   }
    } //fin main
 } // fin class
