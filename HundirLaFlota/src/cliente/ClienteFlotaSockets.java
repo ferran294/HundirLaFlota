@@ -317,40 +317,43 @@ public class ClienteFlotaSockets {
 			        //Obtenemos el botón pulsado y su posición.
 					JButton boton = (JButton) e.getSource();
 					int [] pos = (int[]) boton.getClientProperty("posicion");
-					
-					int valor = auxiliarCliente.pruebaCasilla(pos[0], pos[1]);
-					
-					if(valor == AGUA)
-						boton.setBackground(Color.blue);
-					
-					else if(valor == TOCADO)
-						boton.setBackground(Color.yellow);
-					
-					else {
-						//El barco se hunde.
-						//Obtenemos la cadena con su información y la utilizamos para averiguar que casillas tenemos que cambiar de color.
-						//Actualizamos el valor de quedan que habrá sido reducido en 1.
+					try {
+						int valor = auxiliarCliente.pruebaCasilla(pos[0], pos[1]);
 						
-						String[] datosBarco = auxiliarCliente.getBarco(valor).split("#");	//Obtenemos un vector con las propiedades del Barco
-						int fi = Integer.parseInt(datosBarco[0]);
-						int ci = Integer.parseInt(datosBarco[1]);
-						int t = Integer.parseInt(datosBarco[3]);
+						if(valor == AGUA)
+							boton.setBackground(Color.blue);
 						
-						if(datosBarco[2].equals("V")) {
-							for(int i = 0; i < t; i++) {
-								buttons[fi + i][ci].setBackground(Color.red);
-							}
-						} else {
-							for(int i = 0; i < t; i++) {
-								buttons[fi][ci + i].setBackground(Color.red);
-								
-							}
-						}
-						quedan = auxiliarCliente.getQuedan();
+						else if(valor == TOCADO)
+							boton.setBackground(Color.yellow);
+						
+						else {
+							//El barco se hunde.
+							//Obtenemos la cadena con su información y la utilizamos para averiguar que casillas tenemos que cambiar de color.
+							//Actualizamos el valor de quedan que habrá sido reducido en 1.
 							
+							String[] datosBarco = auxiliarCliente.getBarco(valor).split("#");	//Obtenemos un vector con las propiedades del Barco
+							int fi = Integer.parseInt(datosBarco[0]);
+							int ci = Integer.parseInt(datosBarco[1]);
+							int t = Integer.parseInt(datosBarco[3]);
+							
+							if(datosBarco[2].equals("V")) {
+								for(int i = 0; i < t; i++) {
+									buttons[fi + i][ci].setBackground(Color.red);
+								}
+							} else {
+								for(int i = 0; i < t; i++) {
+									buttons[fi][ci + i].setBackground(Color.red);
+									
+								}
+							}
+							quedan = auxiliarCliente.getQuedanBarcos();
+								
+						}
+						
+						disparos = auxiliarCliente.getDisparos();
+					} catch (IOException ex) {
+						ex.printStackTrace();
 					}
-					
-					disparos = auxiliarCliente.getDisparos();
 					
 					//Si ya no quedan barcos la partida termina.
 					if(quedan == 0)
