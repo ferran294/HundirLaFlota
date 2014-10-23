@@ -44,6 +44,7 @@ public class AuxiliarClienteFlota {
 	   
 	   try {
 		mySocket.sendMessage("0");
+		mySocket.close();
 	} catch (IOException e) {
 		System.out.println("Error al intentar cerrar la sesion");
 		e.printStackTrace();
