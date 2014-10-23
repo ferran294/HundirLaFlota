@@ -73,6 +73,19 @@ class HiloServidorFlota implements Runnable {
             	 for (int i = 0; i < solucion.length; i++)
             		 myDataSocket.sendMessage(solucion[i]);
                break;
+               
+             }
+             
+             //Se han añadido estas dos opciones para permitir la actualización del estado del juego.
+             
+             case 5: {
+            	//Envia los barcos que quedan en la partida.
+            	 myDataSocket.sendMessage("" + partida.getQuedan());
+             }
+             
+             case 6: {
+            	 //Envia los disparos realizados.
+            	 myDataSocket.sendMessage("" + partida.getDisparos());
              }
          } // fin switch
        } // fin while   
