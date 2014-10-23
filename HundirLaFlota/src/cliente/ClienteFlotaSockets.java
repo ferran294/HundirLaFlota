@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 import javax.swing.*;
 import javax.swing.event.MenuListener;
 
-import partida.Partida;
+
 
 public class ClienteFlotaSockets {
 	
@@ -33,7 +33,6 @@ public class ClienteFlotaSockets {
 	/** Parametros por defecto de una partida */
 	private static final int NUMFILAS=8, NUMCOLUMNAS=8, NUMBARCOS=6;
 
-	private Partida partida = null;     // Objeto con los datos de la partida en juego
 	private JFrame frame = null;        // Tablero de juego
 	private JLabel estado = null;       // Texto en el panel de estado
 	private JButton buttons[][] = null; // Botones asociados a las casillas de la partida
@@ -90,10 +89,16 @@ public class ClienteFlotaSockets {
 		
 		anyadeGrid(NUMFILAS, NUMCOLUMNAS);  //Invoca al metodo que anyade los botones del mar
 		
-		partida=new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);  //Crea una partida nueva 
+		//Crea una partida nueva 
+		try {
+			auxiliarCliente.nuevaPartida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+		} catch (IOException e) {
+			System.out.println("Error al crear partida nueva");
+			e.printStackTrace();
+		}  
 		
-		disparos = partida.getDisparos();
-		quedan = partida.getQuedan();
+		disparos = 0;
+		quedan = 0;
 		
 		anyadePanelEstado("Intentos: " + disparos + " Barcos restantes: " + quedan);
 		
@@ -263,8 +268,8 @@ public class ClienteFlotaSockets {
 	}
        
        //Actualizamos los atributos que se habrán reiniciado y actualizamos el estado.
-       disparos = partida.getDisparos();
-       quedan = partida.getQuedan();
+      disparos=0;
+      quedan=0;
        
        cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
 
