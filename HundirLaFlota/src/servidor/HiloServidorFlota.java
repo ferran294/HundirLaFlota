@@ -23,9 +23,7 @@ class HiloServidorFlota implements Runnable {
 	 * @param	myDataSocket	socket stream para comunicarse con el cliente
 	 */
    HiloServidorFlota(MyStreamSocket myDataSocket) {
-	   
-      // Por implementar
-	   
+	   this.myDataSocket = myDataSocket;
    }
  
    /**
@@ -34,24 +32,33 @@ class HiloServidorFlota implements Runnable {
    public void run( ) {
       boolean done = false;
       int operacion = 0;
+      String mensaje;
       // ...
       try {
          while (!done) {
         	 // Recibe una peticion del cliente
+        	 mensaje = myDataSocket.receiveMessage();
+        	 System.out.println("Orden recibida: " + mensaje);
+        	 
         	 // Extrae la operación y los argumentos
-                      
+             String [] op = mensaje.split("#");
+             operacion = Integer.parseInt(op[0]);
+        	 
              switch (operacion) {
              case 0:  // fin de conexión con el cliente
-            	 // ...
+            	 System.out.println("Fin de la sesión.");
+            	 myDataSocket.close();
+            	 done = true;
             	 break;
 
              case 1: { // Crea nueva partida
-            	 // ...
+            	 partida = new Partida(Integer.parseInt(op[1]),Integer.parseInt(op[2]), Integer.parseInt(op[3]));
             	 break;
              }             
              case 2: { // Prueba una casilla y devuelve el resultado al cliente
-            	 // ... 
-                 break;
+            	 int respuesta = partida.pruebaCasilla(Integer.parseInt(op[1]), Integer.parseInt(op[1]));
+                 myDataSocket.sendMessage("" + respuesta);
+            	 break;
              }
              case 3: { // Obtiene los datos de un barco y se los devuelve al cliente
             	 // ... 
