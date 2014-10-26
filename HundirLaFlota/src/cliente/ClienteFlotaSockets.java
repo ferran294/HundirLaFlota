@@ -61,6 +61,7 @@ public class ClienteFlotaSockets {
 		}
 		juego.ejecuta();
 		
+		
 	} 
 	
 	/**
@@ -71,6 +72,8 @@ public class ClienteFlotaSockets {
 			
 			@Override
 			public void run() {
+				
+				
 				dibujaTablero();
 				
 			}
@@ -98,7 +101,12 @@ public class ClienteFlotaSockets {
 		}  
 		
 		disparos = 0;
-		quedan = 0;
+		try {
+			quedan = auxiliarCliente.getQuedanBarcos();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		anyadePanelEstado("Intentos: " + disparos + " Barcos restantes: " + quedan);
 		
@@ -145,9 +153,9 @@ public class ClienteFlotaSockets {
 	 * @param nc	numero de columnas
 	 */
 	private void anyadeGrid(int nf, int nc) {
-		JPanel casillas= new JPanel(new GridLayout(NUMFILAS+1, NUMCOLUMNAS+2));
-		String[] vectorLetras={"A","B","C","D","E","F","G","H"};
-		ButtonListener e=new ButtonListener();
+		JPanel casillas = new JPanel(new GridLayout(NUMFILAS+1, NUMCOLUMNAS+2));
+		String[] vectorLetras = {"A","B","C","D","E","F","G","H"};
+		ButtonListener e = new ButtonListener();
 		buttons=new JButton[NUMFILAS][NUMCOLUMNAS];
 		
 		
@@ -270,7 +278,12 @@ public class ClienteFlotaSockets {
        
        //Actualizamos los atributos que se habrán reiniciado y actualizamos el estado.
       disparos=0;
-      quedan=0;
+      try {
+		quedan=auxiliarCliente.getQuedanBarcos();
+      } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
        
        cambiaEstado("Intentos: " + disparos  + " Barcos restantes: " + quedan);
 
@@ -326,19 +339,23 @@ public class ClienteFlotaSockets {
 					try {
 						int valor = auxiliarCliente.pruebaCasilla(pos[0], pos[1]);
 						
-						if(valor == AGUA)
+						if(valor == AGUA) {
+							System.out.println("Es agua.");
 							boton.setBackground(Color.blue);
-						
-						else if(valor == TOCADO)
+						}
+						else if(valor == TOCADO) {
+							System.out.println("Tocado");
 							boton.setBackground(Color.yellow);
+							
 						
-						else if(valor != HUNDIDO){ //Si el barco no está hundido, no hay que hacer nada, solo incrementar los disparos.
+						}else if (valor != HUNDIDO){ //Si el barco no está hundido, no hay que hacer nada, solo incrementar los disparos.
 							//El barco se hunde.
 							//Obtenemos la cadena con su información y la utilizamos para averiguar que casillas tenemos que cambiar de color.
 							//Actualizamos el valor de quedan que habrá sido reducido en 1.
 							
 							String[] datosBarco = auxiliarCliente.getBarco(valor).split("#");	//Obtenemos un vector con las propiedades del Barco
 							int fi = Integer.parseInt(datosBarco[0]);
+							System.out.println("Fila: " + fi);
 							int ci = Integer.parseInt(datosBarco[1]);
 							int t = Integer.parseInt(datosBarco[3]);
 							

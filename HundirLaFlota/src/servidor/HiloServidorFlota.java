@@ -51,21 +51,23 @@ class HiloServidorFlota implements Runnable {
             	 done = true;
             	 break;
 
-             case 1: { // Crea nueva partida
+             case 1: // Crea nueva partida
             	 partida = new Partida(Integer.parseInt(op[1]),Integer.parseInt(op[2]), Integer.parseInt(op[3]));
+            	 System.out.println("Partida nueva creada.");
             	 break;
-             }             
-             case 2: { // Prueba una casilla y devuelve el resultado al cliente
-            	 int respuesta = partida.pruebaCasilla(Integer.parseInt(op[1]), Integer.parseInt(op[1]));
+                          
+             case 2:  // Prueba una casilla y devuelve el resultado al cliente
+            	 int respuesta = partida.pruebaCasilla(Integer.parseInt(op[1]), Integer.parseInt(op[2]));
+            	 System.out.println(respuesta);
                  myDataSocket.sendMessage("" + respuesta);
             	 break;
-             }
-             case 3: { // Obtiene los datos de un barco y se los devuelve al cliente
-            	 String respuesta = partida.getBarco(Integer.parseInt(op[1]));
-            	 myDataSocket.sendMessage(respuesta);
+             
+             case 3:  // Obtiene los datos de un barco y se los devuelve al cliente
+            	 String res = partida.getBarco(Integer.parseInt(op[1]));
+            	 myDataSocket.sendMessage(res);
                  break;
-             }
-             case 4: { // Devuelve al cliente la solucion en forma de vector de cadenas
+             
+             case 4:  // Devuelve al cliente la solucion en forma de vector de cadenas
             	 String[] solucion = partida.getSolucion();
                // Primero envia el numero de barcos 
             	 myDataSocket.sendMessage("" + solucion.length);
@@ -74,19 +76,20 @@ class HiloServidorFlota implements Runnable {
             		 myDataSocket.sendMessage(solucion[i]);
                break;
                
-             }
+             
              
              //Se han añadido estas dos opciones para permitir la actualización del estado del juego.
              
-             case 5: {
+             case 5: 
             	//Envia los barcos que quedan en la partida.
             	 myDataSocket.sendMessage("" + partida.getQuedan());
-             }
+            	 break;
              
-             case 6: {
+             case 6: 
             	 //Envia los disparos realizados.
             	 myDataSocket.sendMessage("" + partida.getDisparos());
-             }
+            	 break;
+             
          } // fin switch
        } // fin while   
      } // fin try
